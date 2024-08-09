@@ -41,7 +41,8 @@ margin-bottom:10px;
 
 `
 const BoxMain = styled(Box)`
-height: 87vh;
+// height: 87vh;
+height: 100%;
     overflow: scroll;
     overflow-x: hidden;
     // background-color: rgba(0, 0, 0, 0.2);
