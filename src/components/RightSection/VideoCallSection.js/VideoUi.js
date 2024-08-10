@@ -20,11 +20,12 @@ useEffect(() => {
     console.log("setting my video")
     navigator.mediaDevices.getUserMedia({ video: true, audio: true })
     .then((currentStream) => {
-      setStream(currentStream);
-      
-      // setting the video of ours on screen
-      if(myVideo.current){
+        setStream(currentStream);
         
+        // setting the video of ours on screen
+      if(myVideo.current){
+        console.log("myvideo",myVideo);
+        console.log(currentStream);
         myVideo.current.srcObject = currentStream;
       }
     });
