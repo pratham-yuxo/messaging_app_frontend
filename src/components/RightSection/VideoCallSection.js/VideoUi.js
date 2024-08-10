@@ -15,25 +15,42 @@ bottom: 10px;
 `
 const VideoUi = () => {
     const { setStream, callAccepted, myVideo, userVideo, callEnded, stream } = useContext(SocketContext);
-useEffect(() => {
-  
-    console.log("setting my video")
-    navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-    .then((currentStream) => {
-        setStream(currentStream);
-        
-        console.log("myvideo",myVideo);
-        console.log(currentStream);
-        if(myVideo.current){
-        // setting the video of ours on screen
-        myVideo.current.srcObject = currentStream;
-      }
-    }).catch((error)=>{
-        console.log("this error occured",error)
-    })
-    // answerCall();
-  
-}, [])
+    useEffect(() => {
+        console.log("Attempting to set up my video");
+    
+        navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+            .then((currentStream) => {
+                setStream(currentStream);
+    
+                console.log("Stream obtained:", currentStream);
+                console.log("Video ref before setting stream:", myVideo);
+    
+                // Ensure the video element is available
+                if (myVideo.current) {
+                    console.log("Setting the stream to my video element");
+                    myVideo.current.srcObject = currentStream;
+                } else {
+                    console.log("Video element is not available yet, setting a timeout");
+    
+                    // Retry after a short delay if the ref is not yet available
+                    const checkVideoRef = setTimeout(() => {
+                        if (myVideo.current) {
+                            console.log("Setting the stream to my video element after delay");
+                            myVideo.current.srcObject = currentStream;
+                        } else {
+                            console.log("Video element is still not available after delay");
+                        }
+                    }, 100); // Adjust delay as necessary
+    
+                    // Clear timeout if component unmounts or ref becomes available
+                    return () => clearTimeout(checkVideoRef);
+                }
+            })
+            .catch((error) => {
+                console.log("Error accessing media devices:", error);
+            });
+    }, [myVideo]);
+    
 // useEffect(() => {
 //     if (myVideo.current && stream) {
 //       myVideo.current.srcObject = stream;
