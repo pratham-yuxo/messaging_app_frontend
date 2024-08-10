@@ -22,13 +22,15 @@ useEffect(() => {
     .then((currentStream) => {
         setStream(currentStream);
         
-        // setting the video of ours on screen
-      if(myVideo.current){
         console.log("myvideo",myVideo);
         console.log(currentStream);
+        if(myVideo.current){
+        // setting the video of ours on screen
         myVideo.current.srcObject = currentStream;
       }
-    });
+    }).catch((error)=>{
+        console.log("this error occured",error)
+    })
     // answerCall();
   
 }, [])

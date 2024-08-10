@@ -132,7 +132,7 @@ console.log("stream is next")
       answerCall,
       setStream
     }}
-    >
+    > 
       {children}
     </SocketContext.Provider>
   );
