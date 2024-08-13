@@ -25,7 +25,7 @@ const ContextProvider = ({ children }) => {
   
     }
   useEffect(() => { 
-      console.log("inside context, here is socket",socket)
+      console.log("inside context, here is socket",socket);
 
       if(socket.current){
 
