@@ -24,7 +24,6 @@ const MessageSection = (props) => {
   useEffect(() => {
     const fetchMessage = async () => {
       const messages = await getMessages(props.conversation._id);
-      console.log("getting messages in message section",messages);
       props.setmessageToDisplay(messages);
     };
     props.conversation._id && fetchMessage();

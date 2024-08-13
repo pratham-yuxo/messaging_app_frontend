@@ -5,7 +5,6 @@ import LoginBox from "./LoginBox"
 import Home from './Home';
 
 const ForSwitchingLoginTo = () => {
-  console.log("Details",Details)
     const {Details}= useContext(AccountContext)
   return (
     <>

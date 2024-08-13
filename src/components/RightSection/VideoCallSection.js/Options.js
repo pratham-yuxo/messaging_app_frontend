@@ -12,7 +12,6 @@ const Options = () => {
     const [idToCall, setIdToCall] = useState('')
   return (
     <div>
-        {console.log(me)}
         <div class="contarols">
                             {/* <img src="https://i.postimg.cc/3NVtVtgf/chat.png"/>
                             <img src="https://i.postimg.cc/BQPYHG0r/disconnect.png"/> */}

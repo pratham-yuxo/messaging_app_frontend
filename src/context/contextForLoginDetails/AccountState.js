@@ -18,7 +18,6 @@ const AccountState = (props) => {
   const socket = useRef();
   const backendUrl=process.env.REACT_APP_BACKEND_SOCKET_URL || "ws://localhost:5000";
   useEffect(() => {
-    console.log("backend url",backendUrl)
     // socket.current = io("ws://localhost:5000"); //address of backend where server of socket is running
     socket.current = io(backendUrl); //address of backend where server of socket is running
   }, []);

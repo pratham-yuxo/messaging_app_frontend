@@ -55,7 +55,7 @@ const ChatBox = () => {
   const sendChat = async (e, val) => {
     //the e.which of enter key is 13
     // const code = e.which;
-    console.log("conversation", conversation);
+    // console.log("conversation", conversation);
     let code = e.keyCode || e.which;
     if (!val) return;
     //here we will check if the key that has been pressed is enter or not

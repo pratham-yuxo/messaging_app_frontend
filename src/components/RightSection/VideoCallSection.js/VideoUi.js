@@ -16,14 +16,10 @@ bottom: 10px;
 const VideoUi = () => {
     const { setStream, callAccepted, myVideo, userVideo, callEnded, stream } = useContext(SocketContext);
     useEffect(() => {
-        console.log("Attempting to set up my video");
     
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((currentStream) => {
                 setStream(currentStream);
-    
-                console.log("Stream obtained:", currentStream);
-                console.log("Video ref before setting stream:", myVideo);
     
                 // Ensure the video element is available
                 if (myVideo.current) {

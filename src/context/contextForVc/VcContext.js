@@ -18,25 +18,22 @@ const ContextProvider = ({ children }) => {
   const getSocketId=(receiverId)=>{
     socket.current.emit('getSocketIdOfPersonYouAreCalling',receiverId);
     socket.current.on('receiverSocketId', (id) => {
-      console.log("id from fronend",id);
+      // console.log("id from fronend",id);
       setIdUser(id);
 
     });
   
     }
   useEffect(() => { 
-      console.log("inside context, here is socket",socket);
 
       if(socket.current){
 
       socket.current.emit('getSocketId', (socketId) => {
-        console.log(`Received socket ID: ${socketId}`);
         setMe(socketId);
       });
       //   socket.on('startVc');
       // console.log()
       socket.current.on('callUser', ({ from, name: callerName, signal }) => {
-        console.log({from},"call user in frontend")
         setCall({ isReceivingCall: true, from, name: callerName, signal });
       });
       getSocketId(chatOfPersonOnWhichUHaveClicked.email);
@@ -51,7 +48,6 @@ const ContextProvider = ({ children }) => {
 // }, [])
 
 const answerCall = () => {
-  console.log("inside answer call")
 //  !videoCall && setVideoCall(true);
   setCallAccepted(true);
 
@@ -62,7 +58,7 @@ const answerCall = () => {
    
    // creating a signal
    peer.on('signal', (data) => {
-     console.log("peer",data);
+    //  console.log("peer",data);
      socket.current.emit('answerCall', { signal: data, to: call.from });
     });
     
@@ -89,17 +85,14 @@ const answerCall = () => {
     console.log("calling function call user",chatOfPersonOnWhichUHaveClicked.email)
     const peer = new Peer({ initiator: true, trickle: false, stream });
     peer.on('signal', (data) => {
-      console.log(peer);
+      // console.log(peer);
       socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name:Details.name });
     });
-console.log("stream is next")
     peer.on('stream', (currentStream) => {
-      console.log(userVideo.current,"video set")
       userVideo.current.srcObject = currentStream;
     });
 
     socket.current.on('callAccepted', (signal) => {
-      console.log("set call accepted")
       setCallAccepted(true);
 
       peer.signal(signal);

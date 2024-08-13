@@ -12,7 +12,8 @@ export const createUser =async (data)=>{
         // Save the auth token and redirect
         localStorage.setItem('token', json.authtoken); 
         // history("/");
-  console.log("stored ",json.authtoken);}
+  // console.log("stored ",json.authtoken);
+}
     }catch (error) {
      console.log("error in create user in src/allapi/for adding",error)   
     }
@@ -26,7 +27,8 @@ export const login=async(data)=>{
       // Save the auth token and redirect
       localStorage.setItem('token', json.authtoken); 
       // history("/");
-console.log("stored ",json.authtoken);}
+// console.log("stored ",json.authtoken);
+}
   } catch (error) {
     console.log("error in login", error);
   }

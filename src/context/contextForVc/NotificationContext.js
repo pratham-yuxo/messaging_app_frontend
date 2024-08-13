@@ -10,7 +10,7 @@ const ContextProviderN = ({ children }) => {
 useEffect(() => {
   
    socket.current && socket.current.emit('getSocketId', (socketId) => {
-        console.log(`Received socket ID: ${socketId}`);
+        // console.log(`Received socket ID: ${socketId}`);
         setMe(socketId);
       });
     //   socket.current &&   socket.current.on('callUser', ({ from, name: callerName, signal }) => {
