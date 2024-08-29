@@ -11,7 +11,7 @@ import Loader from '../../RightSection/Loader';
 import { uploadFile } from '../../../allApis/forAdding';
 import Textarea from '@mui/joy/Textarea';
 import TextField from '@mui/material/TextField';
-
+import new4 from '../../../images/new4.png';
 const ariaLabel = { 'aria-label': 'description' };
 
 const Profile = (props) => {
@@ -88,18 +88,18 @@ const Profile = (props) => {
     const [editvisibility, seteditvisibility] = useState(false);
     const [isHoveredImg, setIsHoveredImg] = useState(false);
     const [file, setfile] = useState(null);
-    const [imageUrl, setimageUrl] = useState(null);
+    const [imageUrl, setimageUrl] = useState(Details.picture);
     const bioref = useRef(null);
     const inputRef = useRef(null); // New ref for input field
 
-    useEffect(() => {
-        if (imageUrl) {
-            const edit = async () => {
-                await editImage(imageUrl, Details._id);
-            }
-            edit();
-        }
-    }, [imageUrl]);
+    // useEffect(() => {
+    //     if (imageUrl) {
+    //         const edit = async () => {
+    //             await editImage(imageUrl, Details._id);
+    //         }
+    //         edit();
+    //     }
+    // }, [imageUrl]);
 
     useEffect(() => {
         const upload = async () => {
@@ -108,6 +108,7 @@ const Profile = (props) => {
                 data.append("name", file.name);
                 data.append("file", file);
                 let response = await uploadFile(data);
+                await editImage(response.data,Details._id);
                 setimageUrl(response.data);
             }
         }
@@ -161,7 +162,8 @@ const Profile = (props) => {
             <Box style={{
                 display: "flex",
                 justifyContent: "center",
-                padding: "28px 0px"
+                padding: "28px 0px",
+                minHeight:"165px"
             }}>
                 <Animated
                     animationIn='zoomIn'
@@ -175,7 +177,7 @@ const Profile = (props) => {
                             height: "190px",
                             width: "190px",
                             cursor: "pointer"
-                        }} src={Details.picture}
+                        }} src={imageUrl|| new4}
                             onClick={() => seteditvisibility(true)} alt="dp" />
                         {editvisibility && <Box5>
                             <label htmlFor='fileInput'>

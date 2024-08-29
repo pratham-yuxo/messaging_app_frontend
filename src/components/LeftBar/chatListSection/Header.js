@@ -5,6 +5,7 @@ import {TextField,Box,styled} from '@mui/material';
 import InputAdornment from '@mui/material/InputAdornment';
 import HeaderMenu from './HeaderMenu';
 import LeftDrawer from '../sidebarSection/LeftDrawer';
+import new4 from '../../../images/new4.png'
 const Header = (props) => {
     const [isOpen, setisOpen] = useState(false)
     const { Details,darkMode } = useContext(accountContext)
@@ -58,7 +59,7 @@ const handleOpen=()=>{
     return (
         <Box1 >
             <div className="image">
-                <img src={Details.picture} alt="dp" onClick={handleOpen} />
+                <img src={Details.picture || new4} alt="dp" onClick={handleOpen} />
             </div>
             <div style={{"display":"flex"}}>
                 <div className="search" style={{

@@ -1,6 +1,7 @@
 import React, { createContext, useState, useRef, useEffect,useContext } from 'react';
 import Peer from 'simple-peer';
 import AccountContext from '../accountContext';
+import { Videocam } from '@mui/icons-material';
 const SocketContext = createContext();
 
 const ContextProvider = ({ children }) => {
@@ -26,7 +27,7 @@ const ContextProvider = ({ children }) => {
     }
   useEffect(() => { 
 
-      if(socket.current){
+      if(socket.current){ 
 
       socket.current.emit('getSocketId', (socketId) => {
         setMe(socketId);
@@ -35,22 +36,35 @@ const ContextProvider = ({ children }) => {
       // console.log()
       socket.current.on('callUser', ({ from, name: callerName, signal }) => {
         setCall({ isReceivingCall: true, from, name: callerName, signal });
+        console.log(call,"this is set when im receiving a call")
       });
       getSocketId(chatOfPersonOnWhichUHaveClicked.email);
     }
     }, [videoCall,socket.current]);
 
-//    answering a call using peer
-// useEffect(() => {
-  
+useEffect(() => {
+  if(socket.current){
+    console.log("socket set properly")
+    socket.current.on('disconnected',()=>{
+      console.log("got message for disconnection")
+      console.log("vido call current status",videoCall)
+      // if(videoCall){
+        setCallEnded(true);
+        setVideoCall(false);
+        connectionRef.current.destroy();
+        window.location.reload();
+      // }
+    })
 
+  }
 
-// }, [])
+}, [socket.current])
+
 
 const answerCall = () => {
 //  !videoCall && setVideoCall(true);
   setCallAccepted(true);
-
+  console.log("video call status from answer call",videoCall)
 
   
    //  initiator false means we are not initiating this call, we are just picking it up
@@ -102,8 +116,12 @@ const answerCall = () => {
   };
 
   const leaveCall = () => {
-    setCallEnded(true);
+    let email=chatOfPersonOnWhichUHaveClicked.email;
 
+    socket.current.emit("callEnded",email); //telling the receiver that the call has ended
+      
+    
+    setCallEnded(true);
     connectionRef.current.destroy();
     setVideoCall(false);
     window.location.reload();
@@ -123,7 +141,9 @@ const answerCall = () => {
       callUser,
       leaveCall,
       answerCall,
-      setStream
+      setStream,
+      setCallEnded,
+   
     }}
     > 
       {children}

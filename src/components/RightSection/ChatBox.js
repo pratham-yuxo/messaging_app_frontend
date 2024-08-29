@@ -85,7 +85,7 @@ const ChatBox = () => {
       await sendMessage(message);
       setvalue("");
       setimage("");
-      setFile("");
+      setFile(""); 
       // setconversation((prevConversation) => ({
       //   ...prevConversation,
       //   messages: [...prevConversation.messages, message],
