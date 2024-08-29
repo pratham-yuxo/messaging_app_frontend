@@ -6,6 +6,7 @@ import SearchIcon from '@mui/icons-material/Search';
 import AccountContext from '../../context/accountContext';
 import noUser from '../../images/new4.png'
 import VideocamIcon from '@mui/icons-material/Videocam';
+import { VideoCall } from '@mui/icons-material';
 //       ------------styling----------------
 
 const Box3 = styled(Box)`
@@ -42,9 +43,10 @@ color: #54656f;
 
  
 const ChatHeader = (props) => {
-    const {setVideoCall,activeUsers,darkMode} = useContext(AccountContext)
+    const {setVideoCall,activeUsers,darkMode,videoCall} = useContext(AccountContext)
     const startVideocall=()=>{
-        setVideoCall("caller");
+        setVideoCall(true);
+        console.log("video call setted from chatheader.js",videoCall)
     }
     const Typography1=styled(Typography)`
    color: ${darkMode?"white":"black"}

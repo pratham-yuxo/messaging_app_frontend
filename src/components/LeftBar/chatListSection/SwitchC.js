@@ -53,7 +53,6 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
     const {darkMode,setdarkMode}=useContext(accountContext)
     
     const switchHandler = (event) => {
-      console.log(event.target.checked)
       setdarkMode(event.target.checked);
     };
 

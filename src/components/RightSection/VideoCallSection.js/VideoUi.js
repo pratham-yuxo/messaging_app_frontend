@@ -3,6 +3,7 @@ import { Box, styled } from '@mui/material'
 import newLogo from '../../../images/newLogo.png'
 import { SocketContext } from '../../../context/contextForVc/VcContext';
 import Options from './Options';
+import AccountContext from '../../../context/accountContext';
 const BoxUser=styled(Box)`
 position:absolute;
 bottom: 10px;
@@ -15,15 +16,12 @@ bottom: 10px;
 `
 const VideoUi = () => {
     const { setStream, callAccepted, myVideo, userVideo, callEnded, stream } = useContext(SocketContext);
+    const {videoCall} = useContext(AccountContext);
     useEffect(() => {
-        console.log("Attempting to set up my video");
-    
+    console.log("vidoe call stattus from video ui",videoCall)
         navigator.mediaDevices.getUserMedia({ video: true, audio: true })
             .then((currentStream) => {
                 setStream(currentStream);
-    
-                console.log("Stream obtained:", currentStream);
-                console.log("Video ref before setting stream:", myVideo);
     
                 // Ensure the video element is available
                 if (myVideo.current) {
@@ -50,18 +48,25 @@ const VideoUi = () => {
                 console.log("Error accessing media devices:", error);
             });
     }, [myVideo]);
-    
-// useEffect(() => {
-//     if (myVideo.current && stream) {
-//       myVideo.current.srcObject = stream;
-//     }
-//   }, [myVideo, stream]);
-  
-//   useEffect(() => {
-//     if (userVideo.current && stream) {
-//       userVideo.current.srcObject = stream;
-//     }
-//   }, [userVideo, stream,callAccepted]);
+    // useEffect(() => {
+    //     socket.current.on("callEnded", () => {
+    //         console.log("setting the call ended true")
+    //       setCallEnded(true);
+          
+    //       // Stop the video stream
+    //       if (userVideo.current && userVideo.current.srcObject) {
+    //         userVideo.current.srcObject.getTracks().forEach(track => track.stop());
+    //       }
+          
+    //       setVideoCall(false);
+    //     });
+      
+    //     return () => {
+    //       socket.current.off("callEnded");
+    //     };
+    //   }, []);
+      
+
   return (
    
 
@@ -69,14 +74,7 @@ const VideoUi = () => {
          <div className="header">
             <nav>
                 <img src={newLogo} className="logo"/>
-                {/* <ul>
-                    <li><img alt='img' src="https://i.postimg.cc/L8zxQBhv/live.png" className="activeCall"/></li>
-                    <li><img alt='img' src="https://i.postimg.cc/JnggC78Q/video.png"/></li>
-                    <li><img alt='img' src="https://i.postimg.cc/vmb3JgVy/message.png"/></li>
-                    <li><img alt='img' src="https://i.postimg.cc/qR7Q7PwZ/notification.png"/></li>
-                    <li><img alt='img' src="https://i.postimg.cc/k4DZH604/users.png"/></li>
-                    <li><img alt='img' src="https://i.postimg.cc/v84Fqkyz/setting.png"/></li>
-                </ul> */}
+
             </nav>
             <div className="container">
                 <div className="top-icons">
@@ -87,7 +85,6 @@ const VideoUi = () => {
                     <div className="col-1">
                         {/* other person's video */}
                        
-{/* <img src="https://i.postimg.cc/521rVkhD/image.png" alt="" className="host-img" /> */}
 
 {/*  if the call is accepted and the call is not ended */}
 

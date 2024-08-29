@@ -16,7 +16,6 @@ const ChatList = (props) => {
             let response = await getUsers();
             const filterData = response.filter(user => user.name.toLowerCase().includes(props.searchChatlist.toLowerCase()));
             setusers(filterData);
-            // console.log(response)
         }
         fetchData();
     }, [props.searchChatlist])

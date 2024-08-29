@@ -1,6 +1,7 @@
 import React, { createContext, useState, useRef, useEffect,useContext } from 'react';
 import Peer from 'simple-peer';
 import AccountContext from '../accountContext';
+import { Videocam } from '@mui/icons-material';
 const SocketContext = createContext();
 
 const ContextProvider = ({ children }) => {
@@ -18,43 +19,52 @@ const ContextProvider = ({ children }) => {
   const getSocketId=(receiverId)=>{
     socket.current.emit('getSocketIdOfPersonYouAreCalling',receiverId);
     socket.current.on('receiverSocketId', (id) => {
-      console.log("id from fronend",id);
+      // console.log("id from fronend",id);
       setIdUser(id);
 
     });
   
     }
   useEffect(() => { 
-      console.log("inside context, here is socket",socket);
 
-      if(socket.current){
+      if(socket.current){ 
 
       socket.current.emit('getSocketId', (socketId) => {
-        console.log(`Received socket ID: ${socketId}`);
         setMe(socketId);
       });
       //   socket.on('startVc');
       // console.log()
       socket.current.on('callUser', ({ from, name: callerName, signal }) => {
-        console.log({from},"call user in frontend")
         setCall({ isReceivingCall: true, from, name: callerName, signal });
+        console.log(call,"this is set when im receiving a call")
       });
       getSocketId(chatOfPersonOnWhichUHaveClicked.email);
     }
     }, [videoCall,socket.current]);
 
-//    answering a call using peer
-// useEffect(() => {
-  
+useEffect(() => {
+  if(socket.current){
+    console.log("socket set properly")
+    socket.current.on('disconnected',()=>{
+      console.log("got message for disconnection")
+      console.log("vido call current status",videoCall)
+      // if(videoCall){
+        setCallEnded(true);
+        setVideoCall(false);
+        connectionRef.current.destroy();
+        window.location.reload();
+      // }
+    })
 
+  }
 
-// }, [])
+}, [socket.current])
+
 
 const answerCall = () => {
-  console.log("inside answer call")
 //  !videoCall && setVideoCall(true);
   setCallAccepted(true);
-
+  console.log("video call status from answer call",videoCall)
 
   
    //  initiator false means we are not initiating this call, we are just picking it up
@@ -62,7 +72,7 @@ const answerCall = () => {
    
    // creating a signal
    peer.on('signal', (data) => {
-     console.log("peer",data);
+    //  console.log("peer",data);
      socket.current.emit('answerCall', { signal: data, to: call.from });
     });
     
@@ -89,17 +99,14 @@ const answerCall = () => {
     console.log("calling function call user",chatOfPersonOnWhichUHaveClicked.email)
     const peer = new Peer({ initiator: true, trickle: false, stream });
     peer.on('signal', (data) => {
-      console.log(peer);
+      // console.log(peer);
       socket.current.emit('callUser', { userToCall: idUser, signalData: data, from: me, name:Details.name });
     });
-console.log("stream is next")
     peer.on('stream', (currentStream) => {
-      console.log(userVideo.current,"video set")
       userVideo.current.srcObject = currentStream;
     });
 
     socket.current.on('callAccepted', (signal) => {
-      console.log("set call accepted")
       setCallAccepted(true);
 
       peer.signal(signal);
@@ -109,8 +116,12 @@ console.log("stream is next")
   };
 
   const leaveCall = () => {
-    setCallEnded(true);
+    let email=chatOfPersonOnWhichUHaveClicked.email;
 
+    socket.current.emit("callEnded",email); //telling the receiver that the call has ended
+      
+    
+    setCallEnded(true);
     connectionRef.current.destroy();
     setVideoCall(false);
     window.location.reload();
@@ -130,7 +141,9 @@ console.log("stream is next")
       callUser,
       leaveCall,
       answerCall,
-      setStream
+      setStream,
+      setCallEnded,
+   
     }}
     > 
       {children}

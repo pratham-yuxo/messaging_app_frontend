@@ -24,7 +24,6 @@ const reject=()=>{
 }
   return (
     <>
-    {console.log(call,"call")}
       {call.isReceivingCall && !callAccepted && 
       
         <div style={{ 

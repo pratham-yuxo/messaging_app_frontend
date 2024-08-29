@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios" 
 
 const url=process.env.REACT_APP_BACKEND_HTTP_URL;
 // console.log("this is my url",url)
@@ -12,7 +12,8 @@ export const createUser =async (data)=>{
         // Save the auth token and redirect
         localStorage.setItem('token', json.authtoken); 
         // history("/");
-  console.log("stored ",json.authtoken);}
+  // console.log("stored ",json.authtoken);
+}
     }catch (error) {
      console.log("error in create user in src/allapi/for adding",error)   
     }
@@ -26,7 +27,8 @@ export const login=async(data)=>{
       // Save the auth token and redirect
       localStorage.setItem('token', json.authtoken); 
       // history("/");
-console.log("stored ",json.authtoken);}
+// console.log("stored ",json.authtoken);
+}
   } catch (error) {
     console.log("error in login", error);
   }
