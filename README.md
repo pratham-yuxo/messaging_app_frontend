@@ -12,7 +12,7 @@
 <br />
 <div align="center">
   <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/newLogo.png" alt="Logo" width="80" height="80">
+    <img src="https://github.com/user-attachments/assets/dc4ec455-4b32-4a08-8748-1e8b911fd3fe" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Connection</h3>
@@ -62,19 +62,22 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
+![Screenshott](https://github.com/user-attachments/assets/96ee6a93-dc01-42e5-9d14-9949df5d0606)
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+<!--[![Product Name Screen Shot][product-screenshot]](https://example.com)-->
 
 This chat application enables user to chat not only in text but also with voice messages and even with video calling. You can even send any kind of document.
 
 Here we are doing real time chat with the help of socket.io
+![audio](https://github.com/user-attachments/assets/0911492c-dafb-4fd7-a7e6-1a3973b81436)
 
-[![Product Name Screen Shot][product-screenshot3]](https://example.com)
+<!--[![Product Name Screen Shot][product-screenshot3]](https://example.com)-->
 
+![audio](https://github.com/user-attachments/assets/aafe9180-af18-40bb-bb05-5e4ec7b4ba40)
 
 Voice Message service is enabled using wavesufer.js
+![video](https://github.com/user-attachments/assets/d2769597-ecf4-46ee-9489-a834a6603ba7)
 
-![Product Name Screen Shot][product-screenshot2]]
 This app can make a video call in realtime with Web rtc
 
 Why you should contribute in this?
@@ -125,11 +128,11 @@ This is an example of how to list things you need to use the software and how to
   npm install 
   ```
 
-### Installation
+<!--### Installation
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Get a free API Key at 
 2. Clone the repo
    ```sh
    git clone https://github.com/pratham-yuxo/Messaging_App.git
@@ -139,7 +142,7 @@ _Below is an example of how you can instruct your audience on installing and set
    npm install
    ```
 4. make a .env file ex : backend/.env ,and save your mongodb password to run the backend
-
+-->
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -156,7 +159,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 
 
 
-<!-- CONTRIBUTING -->
+<!-- CONTRIBUTING 
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -169,7 +172,7 @@ Don't forget to give the project a star! Thanks again!
 3. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the Branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
+-->
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 
@@ -186,15 +189,15 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Your Name  - darkvoid6565@gmail.com
+Email  - darkvoid6565@gmail.com
 
 <!-- Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name) -->
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
-## Note
+<!--## Note
 Video calling feature is still in development, make sure to enter into video calling section to pick up the call
-
+-->
 <!-- ACKNOWLEDGMENTS -->
 <!-- ## Acknowledgments
 
