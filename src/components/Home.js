@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import ChatBox from "./RightSection/ChatBox"
 import LeftSideBar from "./LeftBar/chatListSection/LeftSideBar"
 import EmptyChat from './RightSection/EmptyChat'
@@ -8,6 +8,7 @@ import { fetchDetails } from '../allApis/forAdding'
 import VideoUi from './RightSection/VideoCallSection.js/VideoUi'
 import { ContextProvider } from '../context/contextForVc/VcContext'
 import Notifications from './RightSection/VideoCallSection.js/Notifications'
+import { CircularProgress } from '@mui/material'
 
 const Home = () => {
 
@@ -22,33 +23,26 @@ const Home = () => {
     flex: '1'
   }
 
+  const [loading, setLoading] = useState(true);
 
-   
   useEffect(() => {
-   
-
     const fun = async () => {
+      setLoading(true);
       if (localStorage.getItem('token')) {
         let details;
 
-          details = await fetchDetails();
-          setDetails(details);
-          if (!details) {
-            history('/login');
-
-          
+        details = await fetchDetails();
+        setDetails(details);
+        setLoading(false);
+        if (!details) {
+          history('/login');
         }
-      }
-      else {
-       
+      } else {
+        setLoading(false);
         history('/login');
       }
-
     }
     fun();
-
-
-
   }, [])
 
   useEffect(() => {
@@ -90,6 +84,20 @@ const Home = () => {
 
         {/* Object.keys() --> will give you all the keys of your object ,if nothing is present then it will return a zero otherwise list of keys */}
       </div>}
+      {loading && (
+        <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+          <div style={{
+            display:'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            flexDirection: 'column'
+          }}>
+
+          <CircularProgress />
+          Wait for few seconds because backend is deployed on free tier which takes time to render first time
+          </div>
+        </div>
+      )}
     </div>
   )
 }
