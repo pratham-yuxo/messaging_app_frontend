@@ -1,6 +1,6 @@
 import axios from "axios" 
 
-const url=process.env.REACT_APP_BACKEND_HTTP_URL1;
+const url=process.env.REACT_APP_BACKEND_HTTP_URL;
 // console.log("this is my url",url)
 //for adding a user
 export const createUser =async (data)=>{

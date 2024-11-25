@@ -16,7 +16,7 @@ const AccountState = (props) => {
   const [darkMode, setdarkMode] = useState(false);
   const [videoCall, setVideoCall] = useState(false);
   const socket = useRef();
-  const backendUrl=process.env.REACT_APP_BACKEND_SOCKET_URL1 || "ws://localhost:5000";
+  const backendUrl=process.env.REACT_APP_BACKEND_SOCKET_URL || "ws://localhost:5000";
   useEffect(() => {
     // socket.current = io("ws://localhost:5000"); //address of backend where server of socket is running
     socket.current = io(backendUrl); //address of backend where server of socket is running
